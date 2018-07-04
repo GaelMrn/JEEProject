@@ -33,6 +33,7 @@ header > nav > ul {
 
 div#logo-container {
     display: inline-block;
+    margin-right: 50px;
 }
 
 header ul li {
@@ -94,6 +95,10 @@ li#admin-menu:hover > ul{
     display: block;
     border-bottom: 1px solid #fff;
     font-size: 12px;
+}
+
+#admin-menu ul li:last-of-type {
+    border-bottom: none;
 }
 
 #admin-menu ul li:hover {
