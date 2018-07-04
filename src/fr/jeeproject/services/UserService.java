@@ -107,4 +107,33 @@ private Connection connection;
 		
 		return user;
 	}
+	
+	public User updateUser(User user) throws SQLException {
+
+		String query = 
+			"UPDATE user SET " +
+			"email = ? , " + 
+			"nom = ? , " + 
+			"prenom = ? , " + 
+			"motDePasse = ? , " + 
+			"idVille = ? , " + 
+			"USE_ROL_ID = ? " +
+			"WHERE id = ?";
+
+		PreparedStatement psmt = connection.prepareStatement(query);
+		
+		psmt.setString(1, user.getEmail());
+		psmt.setString(2, user.getNom());
+		psmt.setString(3, user.getPrenom());
+		psmt.setString(4, user.getMotDePasse());
+		psmt.setLong(5, user.getIdVille());
+		psmt.setLong(6, user.getIdRole());
+		psmt.setLong(7, user.getId());
+		
+		psmt.executeUpdate();
+
+		psmt.close();
+		
+		return user;
+	}
 }

@@ -75,6 +75,8 @@ public class LoginServlet extends HttpServlet {
 	                
 	                session.setAttribute("idRole", user.getIdRole());
 	                
+	                session.setAttribute("idCity", user.getIdVille());
+	                
 	    			// Login succeeded : redirect user
 	    			response.sendRedirect("home");
 	    			

@@ -2,13 +2,12 @@ package fr.jeeproject.pojos;
 
 public class User {
 
-	 private Long id;
+	 	private Long id;
 		private String email;
 		private String nom;
 		private String prenom;
 		private String motDePasse;
 		private Long idVille;
-		private City ville;
 		private Long idRole;
 		
 		/**
