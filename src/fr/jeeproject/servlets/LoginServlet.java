@@ -72,18 +72,20 @@ public class LoginServlet extends HttpServlet {
     		        
     		        // Stock the player in the session
 	                session.setAttribute( "User", user );
-	  
-	    			// Connexion succeeded : redirect user
+	                
+	                session.setAttribute("idRole", user.getIdRole());
+	                
+	    			// Login succeeded : redirect user
 	    			response.sendRedirect("home");
 	    			
 	    			User userSession = (User) session.getAttribute("User");
 
               	}else {					
-					// Connexion failed : Set a class
+					// Login failed : Set a class
 					String errorInput = "errorInput";
 					request.setAttribute("errorInput", errorInput);
 					
-					// Connexion failed : Set an error sentence
+					// Login failed : Set an error sentence
 					String messageErrorLogin = "<span class='error'>Les informations ne correspondent pas.</span>";
 					request.setAttribute("messageErrorLogin", messageErrorLogin);
 					
