@@ -40,48 +40,57 @@ public class AdminProfilServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		// Try to connect to the database
-		try {
-            Connection connection = DataConnect.getConnection();
-            
-            // Instance VilleService
-            CityService cityService =  new CityService(connection);
-            
-            // Retrieve and stock every city
-            List<City> city = cityService.getAll();
-            
-            request.setAttribute("city", city);
-            
-            // Open session
-	        HttpSession session = request.getSession();
-	        
-	        // Get City of the user
-	        City userCity = cityService.getVilleFromId((Long) session.getAttribute("idCity"));
-	        User user = (User) session.getAttribute("User");
+		// Retrieve the session
+        HttpSession session = request.getSession();
 
-	        // Store in session the lastname of the user
-	        request.setAttribute("userLastname", user.getNom());
-	        // Store in session the firstname of the user
-	        request.setAttribute("userFirstname", user.getPrenom());
-	        // Store in session the email of the user
-	        request.setAttribute("userEmail", user.getEmail());
-	        // Store in session the password of the user
-	        request.setAttribute("userPassword", user.getMotDePasse());
-	        // Store in session the name of the city
-	        request.setAttribute("userCity", userCity);
-	        
-		} catch (SQLException | ClassNotFoundException e) {
-			
-			// Can't connect to database
-            e.printStackTrace();
-
-        	// Database connection failed : Set an error sentence
-			String messageErrorDBConnect = "<span class='error'>La connection à la base de données a échoué.</span>";
-			request.setAttribute("messageErrorDBConnect", messageErrorDBConnect);
-			
-        }
+        Long idRole = (Long) session.getAttribute("idRole");
+        
+		if(idRole == null){
+        	// If idRole isn't set, forbid access
+        	response.sendRedirect("home");
+        }else {
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/administration/admin-profil.jsp").forward(request, response);
+			// Try to connect to the database
+			try {
+	            Connection connection = DataConnect.getConnection();
+	            
+	            // Instance VilleService
+	            CityService cityService =  new CityService(connection);
+	            
+	            // Retrieve and stock every city
+	            List<City> city = cityService.getAll();
+	            
+	            request.setAttribute("city", city);
+	            		        
+		        // Get City of the user
+		        City userCity = cityService.getVilleFromId((Long) session.getAttribute("idCity"));
+		        User user = (User) session.getAttribute("User");
+	
+		        // Store in session the lastname of the user
+		        request.setAttribute("userLastname", user.getNom());
+		        // Store in session the firstname of the user
+		        request.setAttribute("userFirstname", user.getPrenom());
+		        // Store in session the email of the user
+		        request.setAttribute("userEmail", user.getEmail());
+		        // Store in session the password of the user
+		        request.setAttribute("userPassword", user.getMotDePasse());
+		        // Store in session the name of the city
+		        request.setAttribute("userCity", userCity);
+		        
+			} catch (SQLException | ClassNotFoundException e) {
+				
+				// Can't connect to database
+	            e.printStackTrace();
+	
+	        	// Database connection failed : Set an error sentence
+				String messageErrorDBConnect = "<span class='error'>La connection à la base de données a échoué.</span>";
+				request.setAttribute("messageErrorDBConnect", messageErrorDBConnect);
+				
+	        }
+			
+			this.getServletContext().getRequestDispatcher("/WEB-INF/administration/admin-profil.jsp").forward(request, response);
+
+        }
 	}
 
 	/**

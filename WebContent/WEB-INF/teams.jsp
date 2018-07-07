@@ -2,6 +2,7 @@
 
 <div class="main-container">
 	<p>Equipes</p>
+	<p>Page en construction</p>
 </div>
 
 

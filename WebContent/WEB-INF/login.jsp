@@ -1,15 +1,16 @@
 <%@include file="template/header.jsp" %>
 
 <div class="main-container">
-	<p>Connexion</p>
 	
-	<div id="formLoginContainer">
+	<div id="form-login-container">
 		
+		<p>Connexion</p>
+	
 		${messageErrorDBConnect}
 		${messageErrorLogin}
 		${emptyLoginField}
 				
-		<form method="post" action="login" id="formLogin">
+		<form method="post" action="login" id="form-login">
 			<label for="email" class="formLoginLabel">Email</label>
 	        <input type="text" name="email" required class="formLoginInput ${errorInput}"/>
 	        
