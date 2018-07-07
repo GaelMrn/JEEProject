@@ -1,9 +1,10 @@
 <%@include file="../template/header.jsp" %>
 
 <div class="main-container">
-	<p>Admin profil</p>
 	
 	<div id="form-admin-profil-container">
+	
+		<p>Admininistration du profil</p>
 	
 		${messageErrorDBConnect}
 		${errorMessage}
@@ -22,6 +23,7 @@
             <label for="password">Mot de passe </label>
             <input type="password" name="password" required class="${errorAdminProfilPassword}" value="${userPassword}"/>
 	
+            <label for="city">Ville </label>
 			<select name="city" required class="form-control input-lg">
                 <%-- <option disabled selected value="ville">${userCity}</option> --%>
                 <option selected value="${userCity.getId()}">${userCity.getNom()}</option>

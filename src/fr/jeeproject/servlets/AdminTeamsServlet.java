@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AdminTeamsServlet
@@ -29,7 +30,26 @@ public class AdminTeamsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/administration/admin-teams.jsp").forward(request, response);
+		// Retrieve the session
+        HttpSession session = request.getSession();
+
+        Long idRole = (Long) session.getAttribute("idRole");
+		
+        if(idRole == null){
+        	// If idRole isn't set, forbid access
+        	response.sendRedirect("home");
+        }else {
+        	
+        	if(idRole == 1) {
+            	// If idRole is administrator, allow access
+            	
+            	this.getServletContext().getRequestDispatcher("/WEB-INF/administration/admin-teams.jsp").forward(request, response);        	
+            }else {
+            	// If idRole isn't set, forbid access
+            	response.sendRedirect("home");
+            }
+        }
+        
 	}
 
 	/**

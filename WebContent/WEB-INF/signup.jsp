@@ -1,15 +1,15 @@
 <%@include file="template/header.jsp" %>
 
 <div class="main-container">
-	<p>Inscription</p>
 	
-	<div id="formSignupContainer">
+	<div id="form-signup-container">
+		<p>Inscription</p>
 	
 		${messageErrorDBConnect}
 		${errorMessage}
 		${signupFieldsEmptyMessage}
 	
-		<form method="post" action="signup" id="formSignup">
+		<form method="post" action="signup" id="form-signup">
 			        	 
             <label for="nom">Nom</label>
             <input type="text" name="lastname" required class=""/>
@@ -23,6 +23,7 @@
             <label for="password">Mot de passe </label>
             <input type="password" name="password" required class="${errorSignupPassword}"/>
 	
+            <label for="city">Ville </label>
 			<select name="city" required class="form-control input-lg">
                 <option disabled selected value="ville">Ville</option>
                 <c:forEach var="city"  items="${city}" >
